@@ -1,1 +1,61 @@
-<p>orders works!</p>
+<h2>Orders</h2>
+<table class="table table-light table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            [(ngModel)]="selectAllCheck"
+            id="chkSelectAll"
+            (change)="toggleAll()"
+          />
+          <label class="form-check-label" for="chkSelectAll">
+            Select All
+          </label>
+        </div>
+      </th>
+      <th>Product Name</th>
+      <th>Order Date</th>
+      <th>Hub</th>
+      <th>Is Delivered</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let o of orders"
+      [ngClass]="{
+        'table-success': o.isDelivered === true,
+        '': o.isDelivered === false
+      }"
+    >
+      <td>
+        <div class="form-check">
+          <input
+            class="form-check-input position-static"
+            type="checkbox"
+            [checked]="o.isDelivered"
+            value="o.isDelivered"
+            aria-label="Is
+          Delivered"
+            (change)="o.isDelivered = !o.isDelivered"
+          />
+        </div>
+      </td>
+      <td>{{ o.name }}</td>
+      <td>{{ o.odate }}</td>
+      <td>{{ o.hub }}</td>
+      <td>{{ o.isDelivered }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>#</th>
+      <th>Total</th>
+    </tr>
+  </tfoot>
+</table>
+
+<button class="btn btn-primary btn-sm" (click)="approved()">Approved</button>
